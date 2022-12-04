@@ -44,10 +44,9 @@ INSERT INTO students(email_adress, phone_number,student_id) VALUES('xyz@gmail.co
 -- varolan datayi guncelleme
 
 --EXAMPLE: student id'si 113 olan veriyi 11113 yap.
-UPDATE students  	       --> update yapmak icin students tablosuna gittik
+UPDATE students --> update yapmak icin students tablosuna gittik
 SET students_id = '11113'  --> degistirmek istedigimiz son degeri girdik
 WHERE student_id = '113';  --> WHERE ile student_id'si 113 olan field'a git. bu degeri degistirecegiz
-						   --> SET degistirmek anlaminda
 	
 --EXAMPLE 2: Tom Hanks'i Antony Quinn yap.
 UPDATE students 
@@ -64,13 +63,13 @@ WHERE email_adress = 'bp@gmail.com';
 --EXAMPLE 4: Tum student_age'leri tablodaki en buyuk yasa cevir
 UPDATE students
 SET student_age = (SELECT MAX(student_age) FROM students);
-	-->SELECT MAX(student_age) ile student_age'deki max degeri sectik
+	--> SELECT MAX(student_age) ile student_age'deki max degeri sectik
 	--> en buyuk yas 18di tum yaslar 18 oldu.
 
 SELECT * FROM students
 
 --EXAMPLE 5: parent tablosu olusturup; parent_id, parent_name, 
---			 student_id, parent_adress, parent_dob field'lari olusturalim
+--student_id, parent_adress, parent_dob field'lari olusturalim
 CREATE TABLE parents(
 	parent_id CHAR(5) PRIMARY KEY,
 	parent_name TEXT,
