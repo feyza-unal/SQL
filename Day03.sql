@@ -150,6 +150,8 @@ SELECT * FROM markalar
 ve bu markada calisanlarin isimlerini ve maaşlarini listeleyin. */
 SELECT isim,maas,isyeri FROM calisanlar
 WHERE isyeri IN (SELECT marka_isim FROM markalar WHERE calisan_sayisi>15000); --> Sorgu icinde sorgu
+	--> 2 tablo arasinda iliski kurdugumuz field isyeri ve marka_isim 
+	--> calisanlar tablosunda calistigimiz icin WHERE isyeri diyoruz
 
 -------------------
 
@@ -158,6 +160,7 @@ isim, maaş ve şehirlerini listeleyiniz */
 
 SELECT isim,maas,sehir FROM calisanlar
 WHERE isyeri IN(SELECT marka_isim FROM markalar WHERE marka_id>101);
+
 
 -------------------
 
@@ -304,6 +307,7 @@ MUSTERI_ISIM 'lerini listeleyen bir sorgu yazınız.
 
 SELECT urun_id,musteri_isim FROM mart
 WHERE EXISTS (SELECT urun_id FROM nisan WHERE mart.urun_id = nisan.urun_id)
+	--> WHERE EXISTS -> eger tabloda varsa alir 
 
 -------------------
 
@@ -316,6 +320,8 @@ SELECT urun_isim,musteri_isim FROM nisan
 WHERE EXISTS (SELECT urun_isim FROM mart WHERE mart.urun_isim=nisan.urun_isim)
 
 --------------------------------------------------------------------------------
+DROP TABLE urunler
+DROP TABLE tedarikciler
 
 --DML--> UPDATE
 CREATE TABLE tedarikciler --> parent
@@ -356,28 +362,32 @@ SELECT * FROM urunler
 --vergi_no’su 102 olan tedarikcinin firma ismini 'Vestel' olarak güncelleyeniz.
 
 UPDATE tedarikciler
-SET firma_ismi = 'Vestel' WHERE vergi_no=102;
+SET firma_ismi = 'Vestel' 
+WHERE vergi_no=102;
 
 -------------------
 
 -- vergi_no’su 101 olan tedarikçinin firma ismini 'casper' ve irtibat_ismi’ni 'Ali Veli' olarak güncelleyiniz.
 
 UPDATE tedarikciler
-SET firma_ismi = 'Casper',irtibat_ismi='Ali Veli' WHERE vergi_no=101
+SET firma_ismi = 'Casper',irtibat_ismi='Ali Veli' 
+WHERE vergi_no=101;
 
 -------------------
 
 --  urunler tablosundaki 'Phone' değerlerini 'Telefon' olarak güncelleyiniz.
 
 UPDATE urunler
-SET urun_isim = 'Telefon' WHERE urun_isim='Phone';
+SET urun_isim = 'Telefon' 
+WHERE urun_isim='Phone';
 
 -------------------
 
 -- urunler tablosundaki urun_id değeri 1004'ten büyük olanların urun_id’sini 1 arttırın.
 
 UPDATE urunler
-SET urun_id = urun_id + 1 WHERE urun_id>1004;
+SET urun_id = urun_id + 1 
+WHERE urun_id>1004;
 
 -------------------
 
@@ -385,7 +395,6 @@ SET urun_id = urun_id + 1 WHERE urun_id>1004;
 
 UPDATE urunler
 SET urun_id = urun_id + ted_vergino
-DELETE FROM urunler
 
 -------------------
 
