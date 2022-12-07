@@ -3,10 +3,10 @@ DROP TABLE notlar
 
 create table ogrenciler
 (
-id int,
-isim varchar(40),
-adres varchar(100),
-sinav_notu int
+	id int,
+	isim varchar(40),
+	adres varchar(100),
+	sinav_notu int
 );
 
 --- INSERT:Veritabanına yeni veri ekler.
@@ -18,7 +18,6 @@ insert into ogrenciler values(123, 'Derya Soylu', 'Istanbul', 95);
 insert into ogrenciler values(124, 'Yavuz Bal', 'Ankara', 85);
 insert into ogrenciler values(125, 'Emre Gül', 'Hatay', 90);
 insert into ogrenciler values(126, 'Harun Reşit', 'Isparta', 100);
-
 select * from ogrenciler;
 
 --SORU: ogrenciler tablosundaki id ve isim sütununu getiriniz
@@ -67,9 +66,9 @@ maas sutununun data tipi int olsun. maas 5000 buyuk olsun. NOT NULL kısıtlamas
 */
 
 create table memurlar(
-id int primary key,
-isim varchar(30) unique,
-maas int check(maas>5000) not null	
+	id int primary key,
+	isim varchar(30) unique,
+	maas int check(maas>5000) not null	
 )
 --> check deger araligini sinirlamak icin kullanilir
 
@@ -87,7 +86,5 @@ constraint pr_ks primary key(isim),
 	--> constraint ile kisitlama yaptik isim olarak pr_ks verdik
 	--> yaptigimiz kisitlama primary key. kisitlamayi hangi sutuna yaptigimizi parantez icine yaziyoruz
 constraint uni_ks unique(soyisim) 	
-	
 )
-
 

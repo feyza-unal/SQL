@@ -10,14 +10,13 @@ UPDATE:Veritabanındaki verileri günceller.
 DROP: Bir veritabanını veya veritabanı içindeki tabloyu siler.
 ALTER: Bir veritabanı veya veritabanı içindeki tabloyu günceller.
 CREATE:Bir veritabanı veya veritabanı içinde tablo oluşturur.
-
 CREATE TABLE parent
 (
 	vergi_no INT PRIMARY KEY,
 	firma_ismi VARCHAR(50),
 	irtibat_ismi VARCHAR(50)
 );
-
+drop table child
 INSERT INTO parent VALUES (101, 'IBM', 'Kim Yon');
 INSERT INTO parent VALUES (102, 'Huawei', 'Çin Li');
 INSERT INTO parent VALUES (103, 'Erikson', 'Maki Tammen');
@@ -26,7 +25,7 @@ SELECT * FROM parent;
 
 CREATE TABLE child
 (
-	ted_vergino int,
+	ted_vergino int not null,
 	urun_id int,
 	urun_isim VARCHAR(50),
 	musteri_isim VARCHAR(50),
@@ -45,6 +44,7 @@ SELECT * FROM child;
 
 --SORU 1: child tablosuna ted_vergino'su 101 olan veri girişi yapınız
 INSERT INTO child VALUES (101,2000,'Araba','Burak');
+INSERT INTO child (ted_vergino) VALUES(102)
 
 --SORU 2: child tablosuna ted_vergino'su 105 olan veri girişi yapınız.
 	--> parent tabloda 105 degeri PRIMARY KEY olarak olmadigi icin child tabloya veri girisi yapamayiz
@@ -91,8 +91,11 @@ CREATE TABLE child
 	urun_isim VARCHAR(50),
 	musteri_isim VARCHAR(50),
 	CONSTRAINT fk FOREIGN KEY(ted_vergino) REFERENCES parent(vergi_no)
-	ON DELETE CASCADE --> artik parent tablosundaki verileri silebiliriz 
-);
+	ON DELETE CASCADE 
+	);
+	--> artik parent tablosundaki verileri silebiliriz 
+	--> yazmasakda tabloyu silerken sonuna CASCADE eklememiz yeterli
+
 INSERT INTO child VALUES(101, 1001,'PC', 'Habip Sanli');
 INSERT INTO child VALUES(102, 1002,'Kamera', 'Zehra Oz');
 INSERT INTO child VALUES(102, 1003,'Saat', 'Mesut Kaya');
@@ -103,7 +106,7 @@ INSERT INTO child VALUES(104, 1007,'Kamera', 'Eymen Ozden');
 SELECT * FROM child;
 
 --SORU1: parent tablosundaki tüm verileri siliniz
-DELETE FROM parent;
+DELETE FROM parent; --> child'daki veriler de silinir
 
 --SORU2: parent tablosunu siliniz
 DROP TABLE parent CASCADE; --> cascade yazmazsak tablo silinmez
@@ -156,3 +159,5 @@ UPDATE toptancilar
 SET sirket_ismi='NOKIA'
 	
 
+DROP TABLE toptancilar
+DROP TABLE malzemeler
