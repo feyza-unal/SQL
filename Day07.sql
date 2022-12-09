@@ -165,6 +165,7 @@ CREATE TABLE ogrenciler
 	id SERIAL,	--> Serial data türü otomatik olarak 1 den baslayarak sıralı olarak sayı ataması yapar
 				--> INSERT INTO ile tabloya veri eklerken serial data türünü kullandığım 
 				--	veri değeri yerine DEFAULT yazarız
+				--> transaction'da serial onerilmez
 	isim VARCHAR(50),
 	veli_isim VARCHAR(50),
 	yazili_notu REAL       
@@ -182,6 +183,8 @@ ROLLBACK to y;
 COMMIT;
 SELECT * FROM ogrenciler
 
+DROP TABLE ogrenciler
+DELETE FROM ogrenciler --> her sildigimizde id degerleri kaldigi yerden artarak devam eder (bu yuzden serial onerilmez)
 /*
 NOT :PostgreSQL de Transaction kullanımı için «Begin;» komutuyla başlarız sonrasında tekrar yanlış 
 bir veriyi düzelmek veya bizim için önemli olan verilerden
